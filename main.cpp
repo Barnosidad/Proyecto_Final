@@ -13,6 +13,7 @@ void pedirDatosV(int *ptr_value);
 void agregar_pila(Nodo *&pila, int n);
 bool salirC(char opc);
 void eliminarNodos(Nodo *&pila);
+bool pila_existente(Nodo *&pila);
 
 int main()
 {
@@ -43,11 +44,24 @@ int main()
                 } while (!salirC(opc));
                 break;
             case 2:
-                eliminarNodos(pila_original);
+                break;
+            case 3:
+                break;
+            case 4:
+                if(!pila_existente(pila_original))
+                {
+                    std::cout << "Y la pila socio?" << std::endl;
+                    break;
+                }
+                else
+                {
+                    eliminarNodos(pila_original);
+                }
+                break;
+            case 5:
                 salir = true;
                 break;
             default:
-                eliminarNodos(pila_original);
                 salir = true;
                 break;
         }
@@ -79,7 +93,10 @@ void print_menu(int *ptr_value)
 {
     std::cout << "Hola tonotos!" << std::endl;
     std::cout << "1. Agregar Nodos" << std::endl;
-    std::cout << "2. Adios" << std::endl;
+    std::cout << "2. Eliminar un solo nodo" << std::endl;
+    std::cout << "3. Ver pilas" << std::endl;
+    std::cout << "4. Eliminar todas las pilas" << std::endl;
+    std::cout << "5. Salir" << std::endl;
     std::cout << "Ingresa una opcion" << std::endl;
     pedirDatosV(ptr_value);
 }
@@ -96,4 +113,9 @@ void eliminarNodos(Nodo *&pila)
         i++;
         delete aux;
     }while(pila!=NULL);
+}
+
+bool pila_existente(Nodo *&pila)
+{
+    return (pila == NULL)? false : true;
 }
