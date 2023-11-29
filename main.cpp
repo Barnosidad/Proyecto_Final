@@ -17,6 +17,7 @@ void eliminarNodos(Nodo *&pila);
 bool pila_existente(Nodo *&pila);
 void recorrerPila(Nodo *&pila);
 void pila_par(Nodo *&pilaS, Nodo *&pilaO);
+void eliminadorDePilas(Nodo *&pilaOriginal,Nodo *&pilaNoRepetidos, Nodo *&pilaPares, Nodo *&pilaImpares,Nodo *&pilaPositivos,Nodo *&pilaNegativos);
 
 int main()
 {
@@ -61,7 +62,14 @@ int main()
                                 break;
                             case 3:
                                 pila_par(pila_original,pila_pares);
-                                recorrerPila(pila_pares);
+                                if(pila_existente(pila_pares))
+                                {
+                                    recorrerPila(pila_pares);
+                                }
+                                else
+                                {
+                                    std::cout << "No se logro crear la pila pares" << std::endl;
+                                }
                                 break;
                             default:
                                 salir_v = true;
@@ -76,17 +84,8 @@ int main()
                     break;
                 }
             case 4:
-                if(!pila_existente(pila_original))
-                {
-                    std::cout << "Y la pila socio?" << std::endl;
-                    break;
-                }
-                else
-                {
-                    eliminarNodos(pila_original);
-                    eliminarNodos(pila_pares);
-                    break;
-                }
+                eliminadorDePilas(pila_original,pila_no_repetidos,pila_pares,pila_impares,pila_positivos,pila_negativos);
+                break;
             case 5:
                 salir = true;
                 break;
@@ -189,4 +188,43 @@ void pila_par(Nodo *&pilaS, Nodo *&pilaO)
         }
         aux = aux->siguiente;
     }while(aux!=NULL);
+}
+
+void eliminadorDePilas(Nodo *&pilaOriginal,Nodo *&pilaNoRepetidos, Nodo *&pilaPares, Nodo *&pilaImpares,Nodo *&pilaPositivos,Nodo *&pilaNegativos)
+{
+    if(pila_existente(pilaOriginal))
+    {
+       std::cout << "Pila Original eliminada" << std::endl;
+        eliminarNodos(pilaOriginal);
+    }
+    else
+    {
+        std::cout << "Y la pila original papito?" << std::endl;
+        return;
+    }
+    if(pila_existente(pilaNoRepetidos))
+    {
+        std::cout << "Pila Original eliminada" << std::endl;
+        eliminarNodos(pilaNoRepetidos);
+    }
+    if(pila_existente(pilaPares))
+    {
+        std::cout << "Pila Original eliminada" << std::endl;
+        eliminarNodos(pilaPares);
+    }
+    if(pila_existente(pilaImpares))
+    {
+        std::cout << "Pila Original eliminada" << std::endl;
+        eliminarNodos(pilaImpares);
+    }
+    if(pila_existente(pilaPositivos))
+    {
+        std::cout << "Pila Original eliminada" << std::endl;
+        eliminarNodos(pilaPositivos);
+    }
+    if(pila_existente(pilaNegativos))
+    {
+        std::cout << "Pila Original eliminada" << std::endl;
+        eliminarNodos(pilaNegativos);
+    }
 }
