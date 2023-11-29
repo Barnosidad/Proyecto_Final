@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 struct Nodo
 {
@@ -14,10 +15,16 @@ void pedirDatosV(int *ptr_value);
 void agregar_pila(Nodo *&pila, int n);
 bool salirC(char opc);
 void eliminarNodos(Nodo *&pila);
+void eliminarNodo(Nodo *&pila);
 bool pila_existente(Nodo *&pila);
 void recorrerPila(Nodo *&pila);
-void pila_par(Nodo *&pilaS, Nodo *&pilaO);
+bool pila_par(Nodo *&pilaS, Nodo *&pilaO);
+bool pila_impar(Nodo *&pilaS, Nodo *&pilaO);
+bool pila_positivo(Nodo *&pilaS, Nodo *&pilaO);
+bool pila_negativo(Nodo *&pilaS, Nodo *&pilaO);
 void eliminadorDePilas(Nodo *&pilaOriginal,Nodo *&pilaNoRepetidos, Nodo *&pilaPares, Nodo *&pilaImpares,Nodo *&pilaPositivos,Nodo *&pilaNegativos);
+void actualizador_pilas(Nodo *&pilaOriginal,Nodo *&pilaNoRepetidos, Nodo *&pilaPares, Nodo *&pilaImpares,Nodo *&pilaPositivos,Nodo *&pilaNegativos);
+void pilas_existentes(Nodo *&pilaOriginal,Nodo *&pilaNoRepetidos, Nodo *&pilaPares, Nodo *&pilaImpares,Nodo *&pilaPositivos,Nodo *&pilaNegativos);
 
 int main()
 {
@@ -31,9 +38,11 @@ int main()
     // Variables
     int n = 0, *ptr_n = &n;
     char opc;
-    bool salir = false, salir_v = false;;
+    bool salir = false, salir_v = false;
+    // Cuerpo del programa
     do
     {
+        pilas_existentes(pila_original,pila_no_repetidos,pila_pares,pila_impares,pila_positivos,pila_negativos);
         print_menu(ptr_n);
         switch (*ptr_n)
         {
@@ -48,6 +57,7 @@ int main()
                 } while (!salirC(opc));
                 break;
             case 2:
+                actualizador_pilas(pila_original,pila_no_repetidos,pila_pares,pila_impares,pila_positivos,pila_negativos);
                 break;
             case 3:
                 if(pila_existente(pila_original))
@@ -61,14 +71,43 @@ int main()
                                 recorrerPila(pila_original);
                                 break;
                             case 3:
-                                pila_par(pila_original,pila_pares);
-                                if(pila_existente(pila_pares))
+                                if(pila_par(pila_original,pila_pares))
                                 {
                                     recorrerPila(pila_pares);
                                 }
                                 else
                                 {
                                     std::cout << "No se logro crear la pila pares" << std::endl;
+                                }
+                                break;
+                            case 4:
+                                if(pila_impar(pila_original,pila_impares))
+                                {
+                                    recorrerPila(pila_impares);
+                                }
+                                else
+                                {
+                                    std::cout << "No se logro crear la pila impares" << std::endl;
+                                }
+                                break;
+                            case 5:
+                                if(pila_positivo(pila_original,pila_positivos))
+                                {
+                                    recorrerPila(pila_positivos);
+                                }
+                                else
+                                {
+                                    std::cout << "No se logro crear la pila positivos" << std::endl;
+                                }
+                                break;
+                            case 6:
+                                if(pila_negativo(pila_original,pila_negativos))
+                                {
+                                    recorrerPila(pila_negativos);
+                                }
+                                else
+                                {
+                                    std::cout << "No se logro crear la pila negativos" << std::endl;
                                 }
                                 break;
                             default:
@@ -87,11 +126,27 @@ int main()
                 eliminadorDePilas(pila_original,pila_no_repetidos,pila_pares,pila_impares,pila_positivos,pila_negativos);
                 break;
             case 5:
-                salir = true;
-                break;
+                if(pila_existente(pila_original))
+                {
+                    std::cout << "Elimina la pila primero papaito" << std::endl;
+                    break;
+                }
+                else
+                {
+                    salir = true;
+                    break;
+                }
             default:
-                salir = true;
-                break;
+                if(pila_existente(pila_original))
+                {
+                    std::cout << "Elimina la pila primero papaito" << std::endl;
+                    break;
+                }
+                else
+                {
+                    salir = true;
+                    break;
+                }
         }
     } while (!salir);
     return 0;
@@ -136,11 +191,27 @@ void eliminarNodos(Nodo *&pila)
     do
     {
         aux = pila;
-        std::cout<< i << " .[" << aux->dato << "] eliminado.\n" << std::endl;
+        std::cout<< i << " .[" << aux->dato << "] eliminado." << std::endl;
         pila = pila->siguiente;
         i++;
         delete aux;
     }while(pila!=NULL);
+}
+
+void eliminarNodo(Nodo *&pila)
+{
+    Nodo *aux;
+    if(pila_existente(pila))
+    {
+        aux = pila;
+        std::cout << " .[" << aux->dato << "] eliminado." << std::endl;
+        pila = pila->siguiente;
+        delete aux;
+    }
+    else
+    {
+        std::cout << "No hay nada que eliminar." << std::endl;
+    }
 }
 
 bool pila_existente(Nodo *&pila)
@@ -154,7 +225,7 @@ void recorrerPila(Nodo *&pila)
     int i = 0;
     do
     {
-        std::cout<< i << " .[" << aux->dato << "].\n" << std::endl;
+        std::cout<< i << " .[" << aux->dato << "]." << std::endl;
         aux = aux->siguiente;
         i++;
     }while(aux!=NULL);
@@ -174,7 +245,7 @@ void print_menu_pilas(int *ptr_value)
     pedirDatosV(ptr_value);
 }
 
-void pila_par(Nodo *&pilaS, Nodo *&pilaO)
+bool pila_par(Nodo *&pilaS, Nodo *&pilaO)
 {
     Nodo *aux = pilaS;
     do
@@ -188,6 +259,58 @@ void pila_par(Nodo *&pilaS, Nodo *&pilaO)
         }
         aux = aux->siguiente;
     }while(aux!=NULL);
+    return pila_existente(pilaO);
+}
+
+bool pila_impar(Nodo *&pilaS, Nodo *&pilaO)
+{
+    Nodo *aux = pilaS;
+    do
+    {
+        if(aux->dato % 2 != 0)
+        {
+            Nodo *nuevo_nodo = new Nodo();
+            nuevo_nodo->dato = aux->dato;
+            nuevo_nodo->siguiente = pilaO;
+            pilaO = nuevo_nodo;
+        }
+        aux = aux->siguiente;
+    }while(aux!=NULL);
+    return pila_existente(pilaO);
+}
+
+bool pila_positivo(Nodo *&pilaS, Nodo *&pilaO)
+{
+    Nodo *aux = pilaS;
+    do
+    {
+        if(aux->dato > 0)
+        {
+            Nodo *nuevo_nodo = new Nodo();
+            nuevo_nodo->dato = aux->dato;
+            nuevo_nodo->siguiente = pilaO;
+            pilaO = nuevo_nodo;
+        }
+        aux = aux->siguiente;
+    }while(aux!=NULL);
+    return pila_existente(pilaO);
+}
+
+bool pila_negativo(Nodo *&pilaS, Nodo *&pilaO)
+{
+    Nodo *aux = pilaS;
+    do
+    {
+        if(aux->dato < 0)
+        {
+            Nodo *nuevo_nodo = new Nodo();
+            nuevo_nodo->dato = aux->dato;
+            nuevo_nodo->siguiente = pilaO;
+            pilaO = nuevo_nodo;
+        }
+        aux = aux->siguiente;
+    }while(aux!=NULL);
+    return pila_existente(pilaO);
 }
 
 void eliminadorDePilas(Nodo *&pilaOriginal,Nodo *&pilaNoRepetidos, Nodo *&pilaPares, Nodo *&pilaImpares,Nodo *&pilaPositivos,Nodo *&pilaNegativos)
@@ -204,27 +327,77 @@ void eliminadorDePilas(Nodo *&pilaOriginal,Nodo *&pilaNoRepetidos, Nodo *&pilaPa
     }
     if(pila_existente(pilaNoRepetidos))
     {
-        std::cout << "Pila Original eliminada" << std::endl;
+        std::cout << "Pila No Repetidos eliminada" << std::endl;
         eliminarNodos(pilaNoRepetidos);
     }
     if(pila_existente(pilaPares))
     {
-        std::cout << "Pila Original eliminada" << std::endl;
+        std::cout << "Pila Pares eliminada" << std::endl;
         eliminarNodos(pilaPares);
     }
     if(pila_existente(pilaImpares))
     {
-        std::cout << "Pila Original eliminada" << std::endl;
+        std::cout << "Pila Impares eliminada" << std::endl;
         eliminarNodos(pilaImpares);
     }
     if(pila_existente(pilaPositivos))
     {
-        std::cout << "Pila Original eliminada" << std::endl;
+        std::cout << "Pila Positivos eliminada" << std::endl;
         eliminarNodos(pilaPositivos);
     }
     if(pila_existente(pilaNegativos))
     {
-        std::cout << "Pila Original eliminada" << std::endl;
+        std::cout << "Pila Negativos eliminada" << std::endl;
         eliminarNodos(pilaNegativos);
     }
+}
+
+void actualizador_pilas(Nodo *&pilaOriginal,Nodo *&pilaNoRepetidos, Nodo *&pilaPares, Nodo *&pilaImpares,Nodo *&pilaPositivos,Nodo *&pilaNegativos)
+{
+    if(pila_existente(pilaOriginal))
+    {
+        eliminarNodo(pilaOriginal);
+    }
+    else
+    {
+        std::cout << "Y la pila original papito?" << std::endl;
+        return;
+    }
+    if(pila_existente(pilaNoRepetidos))
+    {
+        std::cout << "Pila No Repetidos actualizada" << std::endl;
+        eliminarNodos(pilaNoRepetidos);
+    }
+    if(pila_existente(pilaPares))
+    {
+        std::cout << "Pila Pares actualizada" << std::endl;
+        eliminarNodos(pilaPares);
+    }
+    if(pila_existente(pilaImpares))
+    {
+        std::cout << "Pila Impares actualizada" << std::endl;
+        eliminarNodos(pilaImpares);
+    }
+    if(pila_existente(pilaPositivos))
+    {
+        std::cout << "Pila Positivos actualizada" << std::endl;
+        eliminarNodos(pilaPositivos);
+    }
+    if(pila_existente(pilaNegativos))
+    {
+        std::cout << "Pila Negativos actualizada" << std::endl;
+        eliminarNodos(pilaNegativos);
+    }
+}
+
+void pilas_existentes(Nodo *&pilaOriginal,Nodo *&pilaNoRepetidos, Nodo *&pilaPares, Nodo *&pilaImpares,Nodo *&pilaPositivos,Nodo *&pilaNegativos)
+{
+    std::string resultado;
+    if(pila_existente(pilaOriginal)) resultado.append("|O|");
+    if(pila_existente(pilaNoRepetidos)) resultado.append("NR|");
+    if(pila_existente(pilaPares)) resultado.append("P|");
+    if(pila_existente(pilaImpares)) resultado.append("I|");
+    if(pila_existente(pilaPositivos)) resultado.append("PO|");
+    if(pila_existente(pilaNegativos)) resultado.append("NE|");
+    std::cout << resultado << std::endl;
 }
