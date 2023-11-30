@@ -25,7 +25,7 @@ bool pila_negativo(Nodo *&pilaS, Nodo *&pilaO);
 void eliminadorDePilas(Nodo *&pilaOriginal,Nodo *&pilaNoRepetidos, Nodo *&pilaPares, Nodo *&pilaImpares,Nodo *&pilaPositivos,Nodo *&pilaNegativos);
 void actualizador_pilas(Nodo *&pilaOriginal,Nodo *&pilaNoRepetidos, Nodo *&pilaPares, Nodo *&pilaImpares,Nodo *&pilaPositivos,Nodo *&pilaNegativos);
 void pilas_existentes(Nodo *&pilaOriginal,Nodo *&pilaNoRepetidos, Nodo *&pilaPares, Nodo *&pilaImpares,Nodo *&pilaPositivos,Nodo *&pilaNegativos);
-
+//comentario
 int main()
 {
     // Pilas
