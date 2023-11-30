@@ -25,7 +25,8 @@ bool pila_negativo(Nodo *&pilaS, Nodo *&pilaO);
 void eliminadorDePilas(Nodo *&pilaOriginal,Nodo *&pilaNoRepetidos, Nodo *&pilaPares, Nodo *&pilaImpares,Nodo *&pilaPositivos,Nodo *&pilaNegativos);
 void actualizador_pilas(Nodo *&pilaOriginal,Nodo *&pilaNoRepetidos, Nodo *&pilaPares, Nodo *&pilaImpares,Nodo *&pilaPositivos,Nodo *&pilaNegativos);
 void pilas_existentes(Nodo *&pilaOriginal,Nodo *&pilaNoRepetidos, Nodo *&pilaPares, Nodo *&pilaImpares,Nodo *&pilaPositivos,Nodo *&pilaNegativos);
-//comentario
+bool noRepetido(Nodo*pila_no_repetidos,int auxdato);
+
 int main()
 {
     // Pilas
@@ -70,6 +71,25 @@ int main()
                             case 1:
                                 recorrerPila(pila_original);
                                 break;
+
+                            case 2:{
+
+                                Nodo*aux=pila_original;
+                                while(aux!=NULL) {
+                                    if((noRepetido(pila_no_repetidos, aux->dato))==true){
+                                        Nodo* nuevo_nodo=new Nodo();
+                                        nuevo_nodo->dato=aux->dato;
+                                        nuevo_nodo->siguiente=pila_no_repetidos;
+                                        pila_no_repetidos=nuevo_nodo;
+                                        std:: cout<<"\nElemento "<<aux->dato<<" agregado exitosamente a la lista de no repetidos\n";
+                                        aux=aux->siguiente;
+                                    }
+
+                                }
+
+                                break;
+                            }
+
                             case 3:
                                 if(pila_par(pila_original,pila_pares))
                                 {
@@ -400,4 +420,14 @@ void pilas_existentes(Nodo *&pilaOriginal,Nodo *&pilaNoRepetidos, Nodo *&pilaPar
     if(pila_existente(pilaPositivos)) resultado.append("PO|");
     if(pila_existente(pilaNegativos)) resultado.append("NE|");
     std::cout << resultado << std::endl;
+}
+
+bool noRepetido(Nodo* pila, int num) {
+    while (pila != nullptr) {
+        if (pila->dato == num) {
+            return false;
+        }
+        pila = pila->siguiente;
+    }
+    return true;
 }
