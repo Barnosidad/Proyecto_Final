@@ -423,8 +423,8 @@ void pilas_existentes(Nodo *&pilaOriginal,Nodo *&pilaNoRepetidos, Nodo *&pilaPar
 }
 
 bool noRepetido(Nodo* pila, int num) {
-    while (pila != nullptr) {
-        if (pila->dato == num) {
+    while (pila !=NULL) {
+        if (pila->dato==num) {
             return false;
         }
         pila = pila->siguiente;
