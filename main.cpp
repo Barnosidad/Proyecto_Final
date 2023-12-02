@@ -74,18 +74,29 @@ int main()
 
                             case 2:{
 
-						    Nodo* aux = pila_original;
-						    while (aux!=NULL) {
-						        if (noRepetido(pila_no_repetidos, aux->dato)) {
-						            Nodo* nuevo_nodo=new Nodo();
-						            nuevo_nodo->dato=aux->dato;
-						            nuevo_nodo->siguiente=pila_no_repetidos;
-						            pila_no_repetidos=nuevo_nodo;
-						            std::cout<<" .[" << aux->dato << "]." << std::endl;
-						        }
-						        aux=aux->siguiente;
-						    }
-								
+							    Nodo* aux = pila_original;
+							    while (aux!=NULL) 
+								{
+							        if (noRepetido(pila_no_repetidos, aux->dato)) 
+									{
+							            Nodo* nuevo_nodo=new Nodo();
+							            nuevo_nodo->dato=aux->dato;
+							            nuevo_nodo->siguiente=pila_no_repetidos;
+							            pila_no_repetidos=nuevo_nodo;
+							    	}
+							    	
+							        aux=aux->siguiente;
+							    }
+									
+									Nodo*auxiliar=pila_no_repetidos;
+								    while(auxiliar!=NULL) 
+									{
+								        std::cout<<".["<<auxiliar->dato<<"]."<<"\n";
+								        auxiliar=auxiliar->siguiente;
+								    }
+								    std::cout << "\n";
+									
+									
                                 break;
                             }
 
