@@ -81,7 +81,7 @@ int main()
 						            nuevo_nodo->dato=aux->dato;
 						            nuevo_nodo->siguiente=pila_no_repetidos;
 						            pila_no_repetidos=nuevo_nodo;
-						            std::cout<< i << " .[" << aux->dato << "]." << std::endl;
+						            std::cout<<" .[" << aux->dato << "]." << std::endl;
 						        }
 						        aux=aux->siguiente;
 						    }
