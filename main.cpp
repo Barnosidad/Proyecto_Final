@@ -18,6 +18,8 @@ void eliminarNodos(Nodo *&pila);
 void eliminarNodo(Nodo *&pila);
 bool pila_existente(Nodo *&pila);
 void recorrerPila(Nodo *&pila);
+bool b_existencias(Nodo *&pila, int n);
+bool pila_no_repetido(Nodo *&pilaS, Nodo *&pilaO);
 bool pila_par(Nodo *&pilaS, Nodo *&pilaO);
 bool pila_impar(Nodo *&pilaS, Nodo *&pilaO);
 bool pila_positivo(Nodo *&pilaS, Nodo *&pilaO);
@@ -72,6 +74,16 @@ int main()
                         {
                             case 1:
                                 recorrerPila(pila_original);
+                                break;
+                            case 2:
+                                if(pila_no_repetido(pila_original,pila_no_repetidos))
+                                {
+                                    recorrerPila(pila_no_repetidos);
+                                }
+                                else
+                                {
+                                    std::cout << "*NO se logro crear la pila no repetidos*" << std::endl;
+                                }
                                 break;
                             case 3:
                                 if(pila_par(pila_original,pila_pares))
@@ -235,6 +247,45 @@ void print_menu_pilas(int *ptr_value)
     std::cout << "\t7. Regresar al menu principal" << std::endl;
     std::cout << "Ingresa una opcion: " << std::endl;
     pedirDatosV(ptr_value);
+}
+
+bool b_existencias(Nodo *&pila, int n)
+{
+    Nodo *aux = pila;
+    int i = 0;
+    bool b_existencia = false;
+    while(aux!=NULL)
+    {
+        if(aux->dato == n)
+        {
+            i++;
+        }
+        aux = aux->siguiente;
+    }
+    if(i > 1)
+    {
+        std::cout << "Numero " << n << " repetido." << std::endl;
+        b_existencia = true;
+    }
+    return b_existencia;
+}
+
+bool pila_no_repetido(Nodo *&pilaS, Nodo *&pilaO)
+{
+    Nodo *aux = pilaS;
+    if(pila_existente(pilaO)) return true;
+    do
+    {
+        if(!b_existencias(aux,aux->dato))
+        {
+            Nodo *nuevo_nodo = new Nodo();
+            nuevo_nodo->dato = aux->dato;
+            nuevo_nodo->siguiente = pilaO;
+            pilaO = nuevo_nodo;
+        }
+        aux = aux->siguiente;
+    } while (aux!=NULL);
+    return pila_existente(pilaO);
 }
 
 bool pila_par(Nodo *&pilaS, Nodo *&pilaO)
