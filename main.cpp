@@ -82,9 +82,7 @@ int main()
 						            nuevo_nodo->siguiente=pila_no_repetidos;
 						            pila_no_repetidos=nuevo_nodo;
 						            std::cout<<"\nElemento "<<aux->dato<<" agregado exitosamente a la lista de no repetidos\n";
-						            
 						        }
-						        std:: cout<<aux->dato<<"\n";
 						        aux=aux->siguiente;
 						    }
 								
