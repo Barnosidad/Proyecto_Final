@@ -74,19 +74,20 @@ int main()
 
                             case 2:{
 
-                                Nodo*aux=pila_original;
-                                while(aux!=NULL) {
-                                    if((noRepetido(pila_no_repetidos, aux->dato))==true){
-                                        Nodo* nuevo_nodo=new Nodo();
-                                        nuevo_nodo->dato=aux->dato;
-                                        nuevo_nodo->siguiente=pila_no_repetidos;
-                                        pila_no_repetidos=nuevo_nodo;
-                                        std:: cout<<"\nElemento "<<aux->dato<<" agregado exitosamente a la lista de no repetidos\n";
-                                        aux=aux->siguiente;
-                                    }
-
-                                }
-
+						    Nodo* aux = pila_original;
+						    while (aux!=NULL) {
+						        if (noRepetido(pila_no_repetidos, aux->dato)) {
+						            Nodo* nuevo_nodo=new Nodo();
+						            nuevo_nodo->dato=aux->dato;
+						            nuevo_nodo->siguiente=pila_no_repetidos;
+						            pila_no_repetidos=nuevo_nodo;
+						            std::cout<<"\nElemento "<<aux->dato<<" agregado exitosamente a la lista de no repetidos\n";
+						            
+						        }
+						        std:: cout<<aux->dato<<"\n";
+						        aux=aux->siguiente;
+						    }
+								
                                 break;
                             }
 
@@ -422,12 +423,12 @@ void pilas_existentes(Nodo *&pilaOriginal,Nodo *&pilaNoRepetidos, Nodo *&pilaPar
     std::cout << resultado << std::endl;
 }
 
-bool noRepetido(Nodo* pila, int num) {
-    while (pila !=NULL) {
-        if (pila->dato==num) {
+bool noRepetido(Nodo* pila_no_repetidos, int auxdato) {
+    while (pila_no_repetidos!=NULL) {
+        if (pila_no_repetidos->dato==auxdato) {
             return false;
         }
-        pila = pila->siguiente;
+        pila_no_repetidos=pila_no_repetidos->siguiente;
     }
     return true;
 }
