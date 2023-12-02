@@ -104,44 +104,20 @@ int main()
                                 break;
                             }
                             case 3:
-                                if(pila_par(pila_original,pila_pares))
-                                {
-                                    recorrerPila(pila_pares);
-                                }
-                                else
-                                {
-                                    std::cout << "*NO se logro crear la pila pares*" << std::endl;
-                                }
+                                if(pila_par(pila_original,pila_pares)) recorrerPila(pila_pares);
+                                else std::cout << "*NO se logro crear la pila pares*" << std::endl;
                                 break;
                             case 4:
-                                if(pila_impar(pila_original,pila_impares))
-                                {
-                                    recorrerPila(pila_impares);
-                                }
-                                else
-                                {
-                                    std::cout << "*NO se logro crear la pila impares*" << std::endl;
-                                }
+                                if(pila_impar(pila_original,pila_impares)) recorrerPila(pila_impares);
+                                else std::cout << "*NO se logro crear la pila impares*" << std::endl;
                                 break;
                             case 5:
-                                if(pila_positivo(pila_original,pila_positivos))
-                                {
-                                    recorrerPila(pila_positivos);
-                                }
-                                else
-                                {
-                                    std::cout << "*NO se logro crear la pila positivos*" << std::endl;
-                                }
+                                if(pila_positivo(pila_original,pila_positivos)) recorrerPila(pila_positivos);
+                                else std::cout << "*NO se logro crear la pila positivos*" << std::endl;
                                 break;
                             case 6:
-                                if(pila_negativo(pila_original,pila_negativos))
-                                {
-                                    recorrerPila(pila_negativos);
-                                }
-                                else
-                                {
-                                    std::cout << "*NO se logro crear la pila negativos*" << std::endl;
-                                }
+                                if(pila_negativo(pila_original,pila_negativos)) recorrerPila(pila_negativos);
+                                else std::cout << "*NO se logro crear la pila negativos*" << std::endl;
                                 break;
                             default:
                                 salir_v = true;
