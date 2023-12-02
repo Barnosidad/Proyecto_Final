@@ -81,7 +81,7 @@ int main()
 						            nuevo_nodo->dato=aux->dato;
 						            nuevo_nodo->siguiente=pila_no_repetidos;
 						            pila_no_repetidos=nuevo_nodo;
-						            std::cout<<"\nElemento "<<aux->dato<<" agregado exitosamente a la lista de no repetidos\n";
+						            std::cout<< i << " .[" << aux->dato << "]." << std::endl;
 						        }
 						        aux=aux->siguiente;
 						    }
