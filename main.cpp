@@ -76,33 +76,10 @@ int main()
                             case 1:
                                 recorrerPila(pila_original);
                                 break;
-                            case 2:{
-
-							    Nodo* aux = pila_original;
-							    while (aux!=NULL) 
-								{
-							        if (noRepetido(pila_no_repetidos, aux->dato)) 
-									{
-							            Nodo* nuevo_nodo=new Nodo();
-							            nuevo_nodo->dato=aux->dato;
-							            nuevo_nodo->siguiente=pila_no_repetidos;
-							            pila_no_repetidos=nuevo_nodo;
-							    	}
-							    	
-							        aux=aux->siguiente;
-							    }
-									
-									Nodo*auxiliar=pila_no_repetidos;
-								    while(auxiliar!=NULL) 
-									{
-								        std::cout<<".["<<auxiliar->dato<<"]."<<"\n";
-								        auxiliar=auxiliar->siguiente;
-								    }
-								    std::cout << "\n";
-									
-									
+                            case 2:
+                                if(pila_no_repetido(pila_original,pila_no_repetidos)) recorrerPila(pila_no_repetidos);
+                                else std::cout << "*NO se logro crear la pila no repetidos*" << std::endl;
                                 break;
-                            }
                             case 3:
                                 if(pila_par(pila_original,pila_pares)) recorrerPila(pila_pares);
                                 else std::cout << "*NO se logro crear la pila pares*" << std::endl;
@@ -432,14 +409,4 @@ void pilas_existentes(Nodo *&pilaOriginal,Nodo *&pilaNoRepetidos, Nodo *&pilaPar
     if(pila_existente(pilaPositivos)) resultado.append("PO|");
     if(pila_existente(pilaNegativos)) resultado.append("NE|");
     std::cout << "Pilas existentes -> " << resultado << std::endl;
-}
-
-bool noRepetido(Nodo* pila_no_repetidos, int auxdato) {
-    while (pila_no_repetidos!=NULL) {
-        if (pila_no_repetidos->dato==auxdato) {
-            return false;
-        }
-        pila_no_repetidos=pila_no_repetidos->siguiente;
-    }
-    return true;
 }
